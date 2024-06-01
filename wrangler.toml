@@ -1,0 +1,12 @@
+name = "quotes"
+main = "src/entry.js"
+compatibility_date = "2024-05-24"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mattermost"
+database_id = "216835f5-7c91-47d7-86ef-6cbdc4817dba"
+
+[vars]
+ALLOWED_CHANNELS = ["bottest", "212"]
