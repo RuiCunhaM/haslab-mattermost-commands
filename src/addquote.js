@@ -13,9 +13,7 @@ async function addquote(env, body) {
 	const addedBy = body.get('user_name');
 
 	const { changed_db } = (
-		await env.DB.prepare(
-			'INSERT INTO quotes (quote, author, year, addedBy, dailyUsed) VALUES (?1, ?2, ?3, ?4, False)',
-		)
+		await env.DB.prepare('INSERT INTO quotes (quote, author, year, addedBy, dailyUsed) VALUES (?1, ?2, ?3, ?4, False)')
 			.bind(quote, author, year, addedBy)
 			.run()
 	).meta;

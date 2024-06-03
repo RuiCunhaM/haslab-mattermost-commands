@@ -4,8 +4,7 @@ import { getquote } from './getquote';
 
 export default {
 	async fetch(request, env, ctx) {
-		if (request.headers.get('content-type') !== 'application/x-www-form-urlencoded')
-			return code(400, 'Content type not supported');
+		if (request.headers.get('content-type') !== 'application/x-www-form-urlencoded') return code(400, 'Content type not supported');
 
 		const body = await request.formData();
 		const token = body.get('token');
