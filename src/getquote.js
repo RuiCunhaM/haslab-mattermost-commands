@@ -13,7 +13,7 @@ async function getquote(env, body) {
 
 	let result = null;
 
-	if (author.length === 0) result = await getRandomQuote(env);
+	if (author === null || author.length === 0) result = await getRandomQuote(env);
 	else result = await getRandomQuoteByAuthor(env, author);
 
 	if (result !== null) return quote(result['quote'], result['author'], result['year'], result['addedBy']);
