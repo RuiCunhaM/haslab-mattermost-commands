@@ -1,6 +1,7 @@
 import { code, badCommand } from './responses';
 import { addquote } from './addquote';
 import { getquote } from './getquote';
+import { listquotes } from './listquotes';
 
 export default {
 	async fetch(request, env, ctx) {
@@ -19,6 +20,8 @@ export default {
 				return token === env.ADDQUOTE_TOKEN ? addquote(env, body) : code(403);
 			case '/getquote':
 				return token === env.GETQUOTE_TOKEN ? getquote(env, body) : code(403);
+			case '/listquotes':
+				return token === env.LISTQUOTES_TOKEN ? listquotes(env, body) : code(403);
 			default:
 				return badCommand();
 		}

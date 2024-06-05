@@ -35,6 +35,21 @@ function quote(quote, author, year, addedBy) {
 	return Response.json(response);
 }
 
+function quoteslist(quotes) {
+	let response = { ...quotesResponse };
+	response['response_type'] = 'in_channel';
+
+	let mdquotes = '```';
+	quotes.forEach((quote) => {
+		mdquotes += `- "${quote.quote}" ${quote.author}, ${quote.year}\n`;
+	});
+	mdquotes += '```';
+
+	response['attachments'] = [{ color: '#FFA500', text: mdquotes }];
+
+	return Response.json(response);
+}
+
 function quoteNotFound() {
 	let response = { ...quotesResponse };
 	response['text'] = 'No quote found!';
@@ -47,4 +62,4 @@ function badCommand() {
 	return Response.json(response);
 }
 
-export { code, quoteAdded, quote, quoteNotFound, badCommand };
+export { code, quoteAdded, quote, quoteslist, quoteNotFound, badCommand };
