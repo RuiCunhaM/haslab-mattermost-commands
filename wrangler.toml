@@ -10,3 +10,6 @@ database_id = "216835f5-7c91-47d7-86ef-6cbdc4817dba"
 
 [vars]
 ALLOWED_CHANNELS = ["bottest", "212"]
+
+[triggers]
+crons = ["0 9 * * mon-fri"]

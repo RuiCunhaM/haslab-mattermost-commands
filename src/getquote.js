@@ -21,4 +21,4 @@ async function getquote(env, body) {
 	return quoteNotFound();
 }
 
-export { getquote, quoteNotFound };
+export { getRandomQuote, getRandomQuoteByAuthor, getquote };

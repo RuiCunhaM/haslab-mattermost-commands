@@ -2,6 +2,7 @@ import { code, badCommand } from './responses';
 import { addquote } from './addquote';
 import { getquote } from './getquote';
 import { listquotes } from './listquotes';
+import { sendDailyQuote } from './dailyquote';
 
 export default {
 	async fetch(request, env, ctx) {
@@ -25,5 +26,9 @@ export default {
 			default:
 				return badCommand();
 		}
+	},
+
+	async scheduled(event, env, ctx) {
+		await sendDailyQuote(env);
 	},
 };

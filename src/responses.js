@@ -62,4 +62,4 @@ function badCommand() {
 	return Response.json(response);
 }
 
-export { code, quoteAdded, quote, quoteslist, quoteNotFound, badCommand };
+export { quotesResponse, code, quoteAdded, quote, quoteslist, quoteNotFound, badCommand };
