@@ -1,8 +1,8 @@
 import { quotesResponse } from './responses';
-import { getRandomQuote } from './getquote';
+import { getUnusedDailyQuote } from './getquote';
 
 async function sendDailyQuote(env) {
-	const result = await getRandomQuote(env);
+	const result = await getUnusedDailyQuote(env);
 
 	// NOTE: If we fail to retrieve a quote we just "abort"
 	// In the future we should perhaps handle this better
