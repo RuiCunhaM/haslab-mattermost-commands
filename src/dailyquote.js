@@ -1,7 +1,7 @@
 import { quotesResponse } from './responses';
-import { getUnusedDailyQuote } from './getquote';
+import { getUnusedDailyQuote } from './db';
 
-async function sendDailyQuote(env) {
+export async function sendDailyQuote(env) {
 	const result = await getUnusedDailyQuote(env);
 
 	// NOTE: If we fail to retrieve a quote we just "abort"
@@ -29,5 +29,3 @@ async function sendDailyQuote(env) {
 	// TODO: Check response
 	const response = await fetch(env.DAILY_QUOTE_HOOK, init);
 }
-
-export { sendDailyQuote };
