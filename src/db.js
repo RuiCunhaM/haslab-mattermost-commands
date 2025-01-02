@@ -12,12 +12,16 @@ export async function getAllQuotes(env) {
 	return env.DB.prepare('SELECT * from quotes ORDER BY id').all();
 }
 
+export async function getAllQuotesFromAuthor(env, author) {
+	return env.DB.prepare('SELECT * from quotes WHERE author = ?1 ORDER BY id').bind(author).all();
+}
+
 export async function getRandomQuote(env) {
 	return env.DB.prepare('SELECT * FROM quotes ORDER BY RANDOM() LIMIT 1').first();
 }
 
 export async function getRandomQuoteByAuthor(env, author) {
-	return env.DB.prepare('SELECT * FROM quotes WHERE author = ?1 ORDER BY RANDOM() LIMIT 1').bind(`${author}`).first();
+	return env.DB.prepare('SELECT * FROM quotes WHERE author = ?1 ORDER BY RANDOM() LIMIT 1').bind(author).first();
 }
 
 export async function getUnusedDailyQuote(env) {
