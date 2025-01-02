@@ -39,11 +39,11 @@ export function quoteslist(quotes) {
 	let response = { ...quotesResponse };
 	response['response_type'] = 'in_channel';
 
-	let mdquotes = '```';
+	// NOTE: At some point in the future we need to paginate the output
+	let mdquotes = '|ID|Quote|Author|Year|\n|---|---|---|---|\n';
 	quotes.forEach((quote) => {
-		mdquotes += `- "${quote.quote}" ${quote.author}, ${quote.year}\n`;
+		mdquotes += `|${quote.id}|${quote.quote}|${quote.author}|${quote.year}|\n`;
 	});
-	mdquotes += '```';
 
 	response['attachments'] = [{ color: '#FFA500', text: mdquotes }];
 

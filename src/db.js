@@ -9,7 +9,7 @@ export async function addQuote(env, quote, author, year, addedBy) {
 }
 
 export async function getAllQuotes(env) {
-	return env.DB.prepare('SELECT * from quotes').all();
+	return env.DB.prepare('SELECT * from quotes ORDER BY id').all();
 }
 
 export async function getRandomQuote(env) {
