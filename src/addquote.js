@@ -8,6 +8,8 @@ export async function addquote(env, body) {
 	const regexp = '"[^"]*"';
 	const args = [...body.get('text').matchAll(regexp)];
 
+	// TODO: We should make the quote year an optional argument. If not present,
+	// we should assume the current year.
 	if (args.length !== 3) return badCommand();
 
 	const [[quote], [author], [year]] = args.map((x) => x.map((y) => y.slice(1, -1)));

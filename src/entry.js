@@ -16,6 +16,12 @@ export default {
 
 		const command = body.get('command');
 
+		// TODO: In order to have distinct commands, Mattermost forces us to also have
+		// multiple tokens. This will become difficult to manage if we keep adding new
+		// commands. Perhaps we should change our approach and instead invoke commands like:
+		// `/quote add`, `/quote get`, `/quote list`, etc..
+		// This way, we have only one command and one token, and instead, the first command
+		// argument dictates which action to take.
 		switch (command) {
 			case '/addquote':
 				return token === env.ADDQUOTE_TOKEN ? addquote(env, body) : code(403);
