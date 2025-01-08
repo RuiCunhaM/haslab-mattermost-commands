@@ -36,3 +36,25 @@ export async function getUnusedDailyQuote(env) {
 
 	return result;
 }
+
+export async function countTotalQuotes(env) {
+	const r = await env.DB.prepare('SELECT COUNT(*) FROM quotes').first();
+	return r['COUNT(*)'];
+}
+
+export async function countUsedQuotes(env) {
+	const r = await env.DB.prepare('SELECT COUNT(*) FROM quotes WHERE dailyUsed = True').first();
+	return r['COUNT(*)'];
+}
+
+export async function countUnusedQuotes(env) {
+	const r = await env.DB.prepare('SELECT COUNT(*) FROM quotes WHERE dailyUsed = False').first();
+	return r['COUNT(*)'];
+}
+
+export async function quoteStats(env) {
+	const r = await env.DB.prepare('SELECT COUNT(*), SUM(dailyUsed) from quotes').first();
+	const nQuotes = r['COUNT(*)'];
+	const nUsed = r['SUM(dailyUsed)'];
+	return [nQuotes, nUsed];
+}

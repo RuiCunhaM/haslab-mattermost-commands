@@ -1,5 +1,5 @@
 import { quotesResponse } from './responses';
-import { getUnusedDailyQuote } from './db';
+import { getUnusedDailyQuote, quoteStats } from './db';
 
 export async function sendDailyQuote(env) {
 	const result = await getUnusedDailyQuote(env);
@@ -8,13 +8,15 @@ export async function sendDailyQuote(env) {
 	// In the future we should perhaps handle this better
 	if (result === null) return;
 
+	const [nQuotes, nUsed] = await quoteStats(env);
+
 	let payload = { ...quotesResponse };
 	payload['attachments'] = [
 		{
 			color: '#FFA500',
-			pretext: 'Quote of the day!',
+			pretext: `Quote of the day!`,
 			text: `"${result['quote']}"`,
-			footer: `${result['author']}, ${result['year']}`,
+			footer: `${result['author']}, ${result['year']} (ID: ${result['id']}, ${nUsed}/${nQuotes})`,
 		},
 	];
 
