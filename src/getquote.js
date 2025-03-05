@@ -9,7 +9,7 @@ export async function getquote(env, body) {
 	if (author === null || author.length === 0) result = await getRandomQuote(env);
 	else result = await getRandomQuoteByAuthor(env, author);
 
-	if (result !== null) return quote(result['quote'], result['author'], result['year'], result['addedBy']);
+	if (result !== null) return quote(result['id'], result['quote'], result['author'], result['year'], result['addedBy']);
 
 	return quoteNotFound();
 }
