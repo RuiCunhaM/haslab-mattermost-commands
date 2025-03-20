@@ -1,0 +1,19 @@
+meta {
+  name: List Quotes from Author
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8787
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  token: listquotes_token
+  channel_name: bottest
+  command: /listquotes
+  text: @author
+  user_name: @command_author
+}

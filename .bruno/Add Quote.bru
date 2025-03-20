@@ -1,0 +1,19 @@
+meta {
+  name: Add Quote
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8787
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  token: addquote_token
+  channel_name: bottest
+  command: /addquote
+  text: "quote" "@author" "2025"
+  user_name: @command_author
+}

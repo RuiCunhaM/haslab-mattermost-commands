@@ -1,0 +1,19 @@
+meta {
+  name: Get Quote from Author
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8787
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  token: getquote_token
+  channel_name: bottest
+  command: /getquote
+  text: @author
+  user_name: @command_author
+}

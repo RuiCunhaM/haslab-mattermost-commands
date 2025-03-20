@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "HASLab Mattermost commands",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
