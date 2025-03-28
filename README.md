@@ -31,4 +31,4 @@ Instructions for local development and testing using [Wrangler](https://develope
     npx wrangler dev
     ```
 
-4.  Open Bruno's collection at [`.bruno`](.bruno/) and try any command.
+4.  Open Bruno's collection at [`bruno`](bruno/) and try any command.
