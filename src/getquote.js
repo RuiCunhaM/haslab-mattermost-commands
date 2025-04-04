@@ -1,7 +1,7 @@
 import { getRandomQuote, getRandomQuoteByAuthor } from './db';
 import { quote, quoteNotFound } from './responses';
 
-export async function getquote(env, body) {
+export async function getQuote(env, body) {
 	const author = body.get('text');
 
 	let result = null;

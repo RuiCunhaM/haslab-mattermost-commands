@@ -1,11 +1,11 @@
 export async function addQuote(env, quote, author, year, addedBy) {
-	const { changed_db } = (
+	const { changedDb } = (
 		await env.DB.prepare('INSERT INTO quotes (quote, author, year, addedBy, dailyUsed) VALUES (?1, ?2, ?3, ?4, False)')
 			.bind(quote, author, year, addedBy)
 			.run()
 	).meta;
 
-	return changed_db;
+	return changedDb;
 }
 
 export async function getAllQuotes(env) {

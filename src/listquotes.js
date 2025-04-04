@@ -1,7 +1,7 @@
 import { getAllQuotes, getAllQuotesFromAuthor } from './db';
-import { quoteNotFound, quoteslist } from './responses';
+import { quoteNotFound, quotesList } from './responses';
 
-export async function listquotes(env, body) {
+export async function listQuotes(env, body) {
 	const author = body.get('text');
 
 	let quotes = null;
@@ -11,5 +11,5 @@ export async function listquotes(env, body) {
 
 	if (!quotes.success || quotes.results.length == 0) return quoteNotFound();
 
-	return quoteslist(quotes.results);
+	return quotesList(quotes.results);
 }

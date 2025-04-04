@@ -1,7 +1,7 @@
 import { code, badCommand } from './responses';
-import { addquote } from './addquote';
-import { getquote } from './getquote';
-import { listquotes } from './listquotes';
+import { addQuote } from './addquote';
+import { getQuote } from './getquote';
+import { listQuotes } from './listquotes';
 import { sendDailyQuote } from './dailyquote';
 
 export default {
@@ -24,11 +24,11 @@ export default {
 		// argument dictates which action to take.
 		switch (command) {
 			case '/addquote':
-				return token === env.ADDQUOTE_TOKEN ? addquote(env, body) : code(403);
+				return token === env.ADDQUOTE_TOKEN ? addQuote(env, body) : code(403);
 			case '/getquote':
-				return token === env.GETQUOTE_TOKEN ? getquote(env, body) : code(403);
+				return token === env.GETQUOTE_TOKEN ? getQuote(env, body) : code(403);
 			case '/listquotes':
-				return token === env.LISTQUOTES_TOKEN ? listquotes(env, body) : code(403);
+				return token === env.LISTQUOTES_TOKEN ? listQuotes(env, body) : code(403);
 			default:
 				return badCommand();
 		}

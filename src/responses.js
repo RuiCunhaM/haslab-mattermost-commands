@@ -35,17 +35,17 @@ export function quote(id, quote, author, year, addedBy) {
 	return Response.json(response);
 }
 
-export function quoteslist(quotes) {
+export function quotesList(quotes) {
 	let response = { ...quotesResponse };
 	response['response_type'] = 'in_channel';
 
 	// NOTE: At some point in the future we need to paginate the output
-	let mdquotes = '|ID|Quote|Author|Year|\n|---|---|---|---|\n';
+	let mdQuotes = '|ID|Quote|Author|Year|\n|---|---|---|---|\n';
 	quotes.forEach((quote) => {
-		mdquotes += `|${quote.id}|${quote.quote}|${quote.author}|${quote.year}|\n`;
+		mdQuotes += `|${quote.id}|${quote.quote}|${quote.author}|${quote.year}|\n`;
 	});
 
-	response['attachments'] = [{ color: '#FFA500', text: mdquotes }];
+	response['attachments'] = [{ color: '#FFA500', text: mdQuotes }];
 
 	return Response.json(response);
 }

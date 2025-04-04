@@ -1,7 +1,7 @@
 import { addQuote } from './db';
 import { code, quoteAdded, badCommand } from './responses';
 
-export async function addquote(env, body) {
+export async function addQuote(env, body) {
 	if (!body.has('text')) return badCommand();
 
 	// TODO: We should change the command format
@@ -15,9 +15,9 @@ export async function addquote(env, body) {
 	const [[quote], [author], [year]] = args.map((x) => x.map((y) => y.slice(1, -1)));
 	const addedBy = body.get('user_name');
 
-	const changed_db = await addQuote(env, quote, author, year, addedBy);
+	const changedDb = await addQuote(env, quote, author, year, addedBy);
 
-	if (changed_db) {
+	if (changedDb) {
 		return quoteAdded(quote, author, year, addedBy);
 	}
 
