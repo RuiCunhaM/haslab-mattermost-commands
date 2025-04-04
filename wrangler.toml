@@ -12,7 +12,7 @@ database_id = "216835f5-7c91-47d7-86ef-6cbdc4817dba"
 ALLOWED_CHANNELS = ["bottest", "212"]
 
 [triggers]
-crons = ["0 9 * * mon-fri"]
+crons = ["0 8 * * mon-fri", "0 9 * * mon-fri"]
 
 [observability]
 enabled = true

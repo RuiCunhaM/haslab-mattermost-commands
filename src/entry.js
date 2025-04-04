@@ -35,6 +35,12 @@ export default {
 	},
 
 	async scheduled(event, env, ctx) {
-		await sendDailyQuote(env);
+		const ptHour = new Date().toLocaleString('en-GB', {
+			timeZone: 'Europe/Lisbon',
+			hour: '2-digit',
+			hour12: false,
+		});
+
+		if (ptHour === '09') await sendDailyQuote(env);
 	},
 };
