@@ -1,4 +1,4 @@
-export async function addQuote(env, quote, author, year, addedBy) {
+export async function insertQuote(env, quote, author, year, addedBy) {
 	const { changedDb } = (
 		await env.DB.prepare('INSERT INTO quotes (quote, author, year, addedBy, dailyUsed) VALUES (?1, ?2, ?3, ?4, False)')
 			.bind(quote, author, year, addedBy)
