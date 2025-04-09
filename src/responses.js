@@ -22,6 +22,20 @@ export function quoteAdded(quote, author, year, addedBy) {
 	return Response.json(response);
 }
 
+export function quoteEdited(id, quote, author) {
+	let response = { ...quotesResponse };
+	response['response_type'] = 'in_channel';
+	response['attachments'] = [
+		{
+			color: '#FFA500',
+			text: `"${quote}"`,
+			pretext: 'Quote edited!',
+			footer: `${author} (ID: ${id})`,
+		},
+	];
+	return Response.json(response);
+}
+
 export function quote(id, quote, author, year, addedBy) {
 	let response = { ...quotesResponse };
 	response['response_type'] = 'in_channel';

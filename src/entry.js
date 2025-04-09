@@ -3,6 +3,7 @@ import { addQuote } from './addquote';
 import { getQuote } from './getquote';
 import { listQuotes } from './listquotes';
 import { sendDailyQuote } from './dailyquote';
+import { editQuote } from './editquote';
 
 export default {
 	async fetch(request, env, ctx) {
@@ -29,6 +30,8 @@ export default {
 				return token === env.GETQUOTE_TOKEN ? getQuote(env, body) : code(403);
 			case '/listquotes':
 				return token === env.LISTQUOTES_TOKEN ? listQuotes(env, body) : code(403);
+			case '/editquote':
+				return token === env.EDITQUOTE_TOKEN ? editQuote(env, body) : code(403);
 			default:
 				return badCommand();
 		}
