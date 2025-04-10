@@ -1,11 +1,11 @@
 export async function insertQuote(env, quote, author, year, addedBy) {
-	const { changedDb } = (
+	const { changed_db } = (
 		await env.DB.prepare('INSERT INTO quotes (quote, author, year, addedBy, dailyUsed) VALUES (?1, ?2, ?3, ?4, False)')
 			.bind(quote, author, year, addedBy)
 			.run()
 	).meta;
 
-	return changedDb;
+	return changed_db;
 }
 
 export async function getAllQuotes(env) {
@@ -42,9 +42,9 @@ export async function getQuoteById(env, id) {
 }
 
 export async function updateQuote(env, id, quote) {
-	const { changedDb } = (await env.DB.prepare('UPDATE quotes SET quote = ?1 WHERE id == ?2').bind(quote, id).run()).meta;
+	const { changed_db } = (await env.DB.prepare('UPDATE quotes SET quote = ?1 WHERE id == ?2').bind(quote, id).run()).meta;
 
-	return changedDb;
+	return changed_db;
 }
 
 export async function countTotalQuotes(env) {
