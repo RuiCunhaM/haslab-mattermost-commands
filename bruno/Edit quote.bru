@@ -1,0 +1,23 @@
+meta {
+  name: Edit quote
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8787
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  token: editquote_token
+  channel_name: bottest
+  command: /editquote
+  text: "id" "quote"
+  user_name: @command_author
+}
+
+docs {
+  Allows whoever added a quote to edit its content.
+}

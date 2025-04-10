@@ -1,4 +1,4 @@
-import { addQuote } from './db';
+import { insertQuote } from './db';
 import { code, quoteAdded, badCommand } from './responses';
 
 export async function addQuote(env, body) {
@@ -15,7 +15,7 @@ export async function addQuote(env, body) {
 	const [[quote], [author], [year]] = args.map((x) => x.map((y) => y.slice(1, -1)));
 	const addedBy = body.get('user_name');
 
-	const changedDb = await addQuote(env, quote, author, year, addedBy);
+	const changedDb = await insertQuote(env, quote, author, year, addedBy);
 
 	if (changedDb) {
 		return quoteAdded(quote, author, year, addedBy);

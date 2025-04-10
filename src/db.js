@@ -1,4 +1,4 @@
-export async function addQuote(env, quote, author, year, addedBy) {
+export async function insertQuote(env, quote, author, year, addedBy) {
 	const { changedDb } = (
 		await env.DB.prepare('INSERT INTO quotes (quote, author, year, addedBy, dailyUsed) VALUES (?1, ?2, ?3, ?4, False)')
 			.bind(quote, author, year, addedBy)
@@ -35,6 +35,22 @@ export async function getUnusedDailyQuote(env) {
 	await env.DB.prepare('UPDATE quotes SET dailyUsed = True WHERE id = ?1').bind(result['id']).run();
 
 	return result;
+}
+
+export async function getQuoteById(env, id){
+	return await env.DB.prepare('SELECT * FROM quotes WHERE id = ?1')
+		.bind(id)
+		.first();
+}
+
+export async function updateQuote(env, id, quote){
+	const { changedDb } = (
+		await env.DB.prepare('UPDATE quotes SET quote = ?1 WHERE id == ?2')
+			.bind(quote, id)
+			.run()
+	).meta;
+
+	return changedDb;
 }
 
 export async function countTotalQuotes(env) {
