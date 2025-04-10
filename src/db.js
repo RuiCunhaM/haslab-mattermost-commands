@@ -37,18 +37,12 @@ export async function getUnusedDailyQuote(env) {
 	return result;
 }
 
-export async function getQuoteById(env, id){
-	return await env.DB.prepare('SELECT * FROM quotes WHERE id = ?1')
-		.bind(id)
-		.first();
+export async function getQuoteById(env, id) {
+	return await env.DB.prepare('SELECT * FROM quotes WHERE id = ?1').bind(id).first();
 }
 
-export async function updateQuote(env, id, quote){
-	const { changedDb } = (
-		await env.DB.prepare('UPDATE quotes SET quote = ?1 WHERE id == ?2')
-			.bind(quote, id)
-			.run()
-	).meta;
+export async function updateQuote(env, id, quote) {
+	const { changedDb } = (await env.DB.prepare('UPDATE quotes SET quote = ?1 WHERE id == ?2').bind(quote, id).run()).meta;
 
 	return changedDb;
 }
