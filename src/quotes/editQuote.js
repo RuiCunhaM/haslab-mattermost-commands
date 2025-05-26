@@ -1,12 +1,11 @@
 import { getQuoteById, updateQuote } from './db';
-import { code, quoteEdited, badCommand } from './responses';
+import { quoteEdited } from './responses';
+import { code, badCommand } from '../commonResponses';
 
-export async function editQuote(env, body) {
-	if (!body.has('text')) return badCommand();
-
+export async function editQuote(env, body, text) {
 	// TODO: We should change the command format
 	const regexp = '"[^"]*"';
-	const args = [...body.get('text').matchAll(regexp)];
+	const args = [...text.matchAll(regexp)];
 
 	// TODO: Allow variable length for option arguments (year)
 	if (args.length !== 2) return badCommand();

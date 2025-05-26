@@ -1,4 +1,4 @@
-name = "quotes"
+name = "mattermost-commands"
 main = "src/entry.js"
 compatibility_date = "2024-05-24"
 compatibility_flags = ["nodejs_compat"]

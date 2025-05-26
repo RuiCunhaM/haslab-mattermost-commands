@@ -1,9 +1,7 @@
-import { code, badCommand } from './responses';
-import { addQuote } from './addquote';
-import { getQuote } from './getquote';
-import { listQuotes } from './listquotes';
-import { sendDailyQuote } from './dailyquote';
-import { editQuote } from './editquote';
+import { sendDailyQuote } from './quotes/dailyQuote';
+import { quotesDispatcher } from './quotes/quotesDispatcher';
+
+import { code, badCommand } from './commonResponses';
 
 export default {
 	async fetch(request, env, ctx) {
@@ -17,21 +15,9 @@ export default {
 
 		const command = body.get('command');
 
-		// TODO: In order to have distinct commands, Mattermost forces us to also have
-		// multiple tokens. This will become difficult to manage if we keep adding new
-		// commands. Perhaps we should change our approach and instead invoke commands like:
-		// `/quote add`, `/quote get`, `/quote list`, etc..
-		// This way, we have only one command and one token, and instead, the first command
-		// argument dictates which action to take.
 		switch (command) {
-			case '/addquote':
-				return token === env.ADDQUOTE_TOKEN ? addQuote(env, body) : code(403);
-			case '/getquote':
-				return token === env.GETQUOTE_TOKEN ? getQuote(env, body) : code(403);
-			case '/listquotes':
-				return token === env.LISTQUOTES_TOKEN ? listQuotes(env, body) : code(403);
-			case '/editquote':
-				return token === env.EDITQUOTE_TOKEN ? editQuote(env, body) : code(403);
+			case '/quote':
+				return token === env.QUOTE_TOKEN ? quotesDispatcher(env, body) : code(403);
 			default:
 				return badCommand();
 		}

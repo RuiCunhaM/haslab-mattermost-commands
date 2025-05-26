@@ -4,10 +4,6 @@ export let quotesResponse = {
 	response_type: 'ephemeral',
 };
 
-export function code(code, message = null) {
-	return new Response(message, { status: code });
-}
-
 export function quoteAdded(quote, author, year, addedBy) {
 	let response = { ...quotesResponse };
 	response['response_type'] = 'in_channel';
@@ -67,11 +63,5 @@ export function quotesList(quotes) {
 export function quoteNotFound() {
 	let response = { ...quotesResponse };
 	response['text'] = 'No quote found!';
-	return Response.json(response);
-}
-
-export function badCommand() {
-	let response = { ...quotesResponse };
-	response['text'] = 'Wrong command usage. Try `\\help` for more information.';
 	return Response.json(response);
 }

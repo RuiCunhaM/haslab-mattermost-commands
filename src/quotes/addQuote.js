@@ -1,12 +1,11 @@
 import { insertQuote } from './db';
-import { code, quoteAdded, badCommand } from './responses';
+import { quoteAdded } from './responses';
+import { code, badCommand } from '../commonResponses';
 
-export async function addQuote(env, body) {
-	if (!body.has('text')) return badCommand();
-
+export async function addQuote(env, body, text) {
 	// TODO: We should change the command format
 	const regexp = '"[^"]*"';
-	const args = [...body.get('text').matchAll(regexp)];
+	const args = [...text.matchAll(regexp)];
 
 	// TODO: We should make the quote year an optional argument. If not present,
 	// we should assume the current year.
