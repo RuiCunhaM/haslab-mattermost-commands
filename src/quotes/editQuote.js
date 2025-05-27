@@ -2,7 +2,7 @@ import { getQuoteById, updateQuote } from './db';
 import { quoteEdited } from './responses';
 import { code, badCommand } from '../commonResponses';
 
-export async function editQuote(env, body, text) {
+export async function editQuote(env, text, editor) {
 	// TODO: We should change the command format
 	const regexp = '"[^"]*"';
 	const args = [...text.matchAll(regexp)];
@@ -11,7 +11,6 @@ export async function editQuote(env, body, text) {
 	if (args.length !== 2) return badCommand();
 
 	const [[id], [new_quote]] = args.map((x) => x.map((y) => y.slice(1, -1)));
-	const editor = body.get('user_name');
 
 	const existingQuote = await getQuoteById(env, id);
 

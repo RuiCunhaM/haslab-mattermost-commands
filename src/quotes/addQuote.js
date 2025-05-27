@@ -2,7 +2,7 @@ import { insertQuote } from './db';
 import { quoteAdded } from './responses';
 import { code, badCommand } from '../commonResponses';
 
-export async function addQuote(env, body, text) {
+export async function addQuote(env, text, addedBy) {
 	// TODO: We should change the command format
 	const regexp = '"[^"]*"';
 	const args = [...text.matchAll(regexp)];
@@ -12,7 +12,6 @@ export async function addQuote(env, body, text) {
 	if (args.length !== 3) return badCommand();
 
 	const [[quote], [author], [year]] = args.map((x) => x.map((y) => y.slice(1, -1)));
-	const addedBy = body.get('user_name');
 
 	const changedDb = await insertQuote(env, quote, author, year, addedBy);
 

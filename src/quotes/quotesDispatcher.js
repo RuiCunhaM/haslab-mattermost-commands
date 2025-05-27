@@ -14,9 +14,9 @@ export async function quotesDispatcher(env, body) {
 
 	switch (subCommand) {
 		case 'add':
-			return addQuote(env, body, text);
+			return addQuote(env, text, body.get('user_name'));
 		case 'edit':
-			return editQuote(env, body, text);
+			return editQuote(env, text, body.get('user_name'));
 		case 'get':
 			return getQuote(env, text);
 		case 'list':
