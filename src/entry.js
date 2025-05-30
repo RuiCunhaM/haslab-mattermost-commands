@@ -1,5 +1,6 @@
 import { sendDailyQuote } from './quotes/dailyQuote';
 import { quotesDispatcher } from './quotes/quotesDispatcher';
+import { volleyDispatcher } from './volley/volleyDispatcher';
 
 import { code, badCommand } from './commonResponses';
 
@@ -18,6 +19,8 @@ export default {
 		switch (command) {
 			case '/quote':
 				return token === env.QUOTE_TOKEN ? quotesDispatcher(env, body) : code(403);
+			case '/volley':
+				return token === env.VOLLEY_TOKEN ? volleyDispatcher(env, body) : code(403);
 			default:
 				return badCommand();
 		}

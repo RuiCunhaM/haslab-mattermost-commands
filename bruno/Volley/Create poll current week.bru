@@ -1,0 +1,19 @@
+meta {
+  name: Create poll current week
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8787
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  token: volley_token
+  channel_name: bottest
+  command: /volley
+  text: create current
+  user_name: @command_author
+}
