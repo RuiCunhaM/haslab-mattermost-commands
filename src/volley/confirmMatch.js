@@ -1,4 +1,5 @@
 import { badCommand } from '../commonResponses';
+import { sendDiscordConfirmation } from './discord';
 import { matchConfirmation } from './responses';
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -19,7 +20,7 @@ export async function confirmMatch(env, dateString) {
 	const formattedDate = `${day} ${MONTHS[month - 1]} ${year} ${hour}%3A${minute}`;
 	const link = `https://my.calendarlink.com/link?collection=${env.CL_COLLECTION}&title=Volleyball%20Match&start=${formattedDate}&duration=60 minutes&timezone=Europe%2FLisbon&location=Nave 2`;
 
-	// TODO: Discord HOOK
+	await sendDiscordConfirmation(env, dateString, link);
 
 	return matchConfirmation(dateString, link);
 }

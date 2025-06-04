@@ -1,4 +1,5 @@
 import { badCommand } from '../commonResponses';
+import { sendDiscordMessage } from './discord';
 import { volleyMessage } from './responses';
 
 const VALID_HOURS = ['17:00', '18:00'];
@@ -149,7 +150,7 @@ export async function createPoll(env, text) {
 	const slots = await getSlots(date);
 	const inviteLink = await createRalllyPoll(env, date, slots);
 
-	// TODO: Discord hook
+	await sendDiscordMessage(env, title, inviteLink);
 
 	return volleyMessage(title, inviteLink);
 }
