@@ -1,7 +1,6 @@
 name = "mattermost-commands"
 main = "src/entry.js"
 compatibility_date = "2024-05-24"
-compatibility_flags = ["nodejs_compat"]
 
 [[d1_databases]]
 binding = "DB"
