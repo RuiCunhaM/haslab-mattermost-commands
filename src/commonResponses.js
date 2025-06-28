@@ -6,7 +6,7 @@ export let baseResponse = {
 
 export function badCommand() {
 	let response = { ...baseResponse };
-	response['text'] = 'Wrong command usage. Try `/help` for more information.';
+	response['text'] = 'Wrong command usage. Try `/quote man` or `/volley man` for more information.';
 	return Response.json(response);
 }
 

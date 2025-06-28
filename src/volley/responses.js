@@ -37,3 +37,15 @@ export async function matchConfirmation(dateString, link) {
 	];
 	return Response.json(response);
 }
+
+export function volleyMan(text) {
+	let response = { ...volleyResponse };
+	response['text'] = ''; // Override @channel tag
+	response['attachments'] = [
+		{
+			color: '#FFFF00',
+			text: text,
+		},
+	];
+	return Response.json(response);
+}

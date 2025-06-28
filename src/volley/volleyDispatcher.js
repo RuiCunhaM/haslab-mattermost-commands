@@ -1,6 +1,7 @@
 import { createPoll } from './createPoll';
 import { confirmMatch } from './confirmMatch';
 import { echo } from './echo';
+import { man } from './man';
 
 import { badCommand } from '../commonResponses';
 
@@ -18,6 +19,8 @@ export async function volleyDispatcher(env, body) {
 			return confirmMatch(env, text);
 		case 'echo':
 			return echo(env, text);
+		case 'man':
+			return man();
 		default:
 			return badCommand();
 	}

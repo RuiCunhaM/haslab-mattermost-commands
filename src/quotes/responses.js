@@ -65,3 +65,14 @@ export function quoteNotFound() {
 	response['text'] = 'No quote found!';
 	return Response.json(response);
 }
+
+export function quotesMan(text) {
+	let response = { ...quotesResponse };
+	response['attachments'] = [
+		{
+			color: '#FFA500',
+			text: text,
+		},
+	];
+	return Response.json(response);
+}
