@@ -1,6 +1,6 @@
 import { badCommand } from '../commonResponses';
 import { sendDiscordMessage } from './discord';
-import { volleyMessage } from './responses';
+import { volleyMessage, creatingPoll } from './responses';
 
 const VALID_HOURS = ['17:00', '18:00'];
 const RALLLY_CREATE_URL = 'https://app.rallly.co/api/trpc/polls.create?batch=1';
@@ -129,7 +129,26 @@ async function createRalllyPoll(env, date, slots) {
 	return `https://app.rallly.co/invite/${urlId}`;
 }
 
-export async function createPoll(env, text) {
+async function createPollInternal(env, date, title, responseUrl) {
+	return new Promise(async function(resolve, _) {
+		const slots = await getSlots(date);
+		const inviteLink = await createRalllyPoll(env, date, slots);
+
+		await sendDiscordMessage(env, title, inviteLink);
+
+		await fetch(responseUrl, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: volleyMessage(title, inviteLink),
+		});
+
+		resolve();
+	});
+}
+
+export async function createPoll(env, ctx, text, responseUrl) {
 	let date = new Date();
 	let title = 'Rallly for next week!';
 
@@ -147,10 +166,7 @@ export async function createPoll(env, text) {
 			return badCommand();
 	}
 
-	const slots = await getSlots(date);
-	const inviteLink = await createRalllyPoll(env, date, slots);
+	ctx.waitUntil(createPollInternal(env, date, title, responseUrl));
 
-	await sendDiscordMessage(env, title, inviteLink);
-
-	return volleyMessage(title, inviteLink);
+	return creatingPoll();
 }

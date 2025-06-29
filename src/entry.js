@@ -20,7 +20,7 @@ export default {
 			case '/quote':
 				return token === env.QUOTE_TOKEN ? quotesDispatcher(env, body) : code(403);
 			case '/volley':
-				return token === env.VOLLEY_TOKEN ? volleyDispatcher(env, body) : code(403);
+				return token === env.VOLLEY_TOKEN ? volleyDispatcher(env, ctx, body) : code(403);
 			default:
 				return badCommand();
 		}

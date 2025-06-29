@@ -5,7 +5,7 @@ import { man } from './man';
 
 import { badCommand } from '../commonResponses';
 
-export async function volleyDispatcher(env, body) {
+export async function volleyDispatcher(env, ctx, body) {
 	if (!body.has('text')) return badCommand();
 
 	let text = body.get('text');
@@ -14,7 +14,7 @@ export async function volleyDispatcher(env, body) {
 
 	switch (subCommand) {
 		case 'create':
-			return createPoll(env, text);
+			return createPoll(env, ctx, text, body.get('response_url'));
 		case 'confirm':
 			return confirmMatch(env, text);
 		case 'echo':

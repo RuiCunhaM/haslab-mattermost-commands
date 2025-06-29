@@ -5,6 +5,19 @@ export let volleyResponse = {
 	text: '<!channel>',
 };
 
+export function creatingPoll() {
+	let response = { ...volleyResponse };
+	response['text'] = ''; // Override @channel tag
+	response['attachments'] = [
+		{
+			color: '#FFFF00',
+			title: 'Processing...',
+			text: 'Creating poll, please wait.',
+		},
+	];
+	return Response.json(response);
+}
+
 export function volleyMessage(title, message) {
 	let response = { ...volleyResponse };
 	response['response_type'] = 'in_channel';
@@ -15,7 +28,7 @@ export function volleyMessage(title, message) {
 			text: message,
 		},
 	];
-	return Response.json(response);
+	return JSON.stringify(response);
 }
 
 export async function matchConfirmation(dateString, link) {
