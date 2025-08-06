@@ -47,7 +47,6 @@ export function quote(id, quote, author, year, addedBy) {
 
 export function quotesList(quotes) {
 	let response = { ...quotesResponse };
-	response['response_type'] = 'in_channel';
 
 	// NOTE: At some point in the future we need to paginate the output
 	let mdQuotes = '|ID|Quote|Author|Year|\n|---|---|---|---|\n';
