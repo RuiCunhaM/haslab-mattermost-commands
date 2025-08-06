@@ -51,7 +51,7 @@ export function quotesList(quotes) {
 	// NOTE: At some point in the future we need to paginate the output
 	let mdQuotes = '|ID|Quote|Author|Year|\n|---|---|---|---|\n';
 	quotes.forEach((quote) => {
-		mdQuotes += `|${quote.id}|${quote.quote}|${quote.author}|${quote.year}|\n`;
+		mdQuotes += `|${quote.id}|${quote.quote.replace(/\n/g, ' ')}|${quote.author}|${quote.year}|\n`;
 	});
 
 	response['attachments'] = [{ color: '#FFA500', text: mdQuotes }];
