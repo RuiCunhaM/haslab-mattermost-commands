@@ -13,10 +13,10 @@ export async function addQuote(env, text, addedBy) {
 
 	const [[quote], [author], [year]] = args.map((x) => x.map((y) => y.slice(1, -1)));
 
-	const changedDb = await insertQuote(env, quote, author, year, addedBy);
+	const id = await insertQuote(env, quote, author, year, addedBy);
 
-	if (changedDb) {
-		return quoteAdded(quote, author, year, addedBy);
+	if (id) {
+		return quoteAdded(id, quote, author, year, addedBy);
 	}
 
 	return code(500, 'Failed to add Quote');

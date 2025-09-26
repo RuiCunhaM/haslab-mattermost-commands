@@ -4,7 +4,7 @@ export let quotesResponse = {
 	response_type: 'ephemeral',
 };
 
-export function quoteAdded(quote, author, year, addedBy) {
+export function quoteAdded(id, quote, author, year, addedBy) {
 	let response = { ...quotesResponse };
 	response['response_type'] = 'in_channel';
 	response['attachments'] = [
@@ -12,7 +12,7 @@ export function quoteAdded(quote, author, year, addedBy) {
 			color: '#FFA500',
 			text: `"${quote}"`,
 			pretext: 'New quote added!',
-			footer: `${author}, ${year}`,
+			footer: `${author}, ${year} (ID: ${id})`,
 		},
 	];
 	return Response.json(response);
