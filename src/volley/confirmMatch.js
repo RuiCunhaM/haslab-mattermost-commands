@@ -17,8 +17,8 @@ export async function confirmMatch(env, dateString) {
 	}
 
 	// NOTE: There is no need to pad hour or minute values
-	const formattedDate = `${day} ${MONTHS[month - 1]} ${year} ${hour}%3A${minute}`;
-	const link = `https://my.calendarlink.com/link?collection=${env.CL_COLLECTION}&title=Volleyball%20Match&start=${formattedDate}&duration=60 minutes&timezone=Europe%2FLisbon&location=Nave 2`;
+	const formattedDate = `${day}%20${MONTHS[month - 1]}%20${year}%20${hour}%3A${minute}`;
+	const link = `https://my.calendarlink.com/link?collection=${env.CL_COLLECTION}&title=Volleyball%20Match&start=${formattedDate}&duration=60%20minutes&timezone=Europe%2FLisbon&location=Nave%202`;
 
 	await sendDiscordConfirmation(env, dateString, link);
 
