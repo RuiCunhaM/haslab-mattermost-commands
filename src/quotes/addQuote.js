@@ -11,7 +11,7 @@ export async function addQuote(env, text, addedBy) {
 	// we should assume the current year.
 	if (args.length !== 3) return badCommand();
 
-	const [[quote], [author], [year]] = args.map((x) => x.map((y) => y.slice(1, -1)));
+	const [[quote], [author], [year]] = args.map((x) => x.map((y) => y.slice(1, -1).trim()));
 
 	const id = await insertQuote(env, quote, author, year, addedBy);
 
