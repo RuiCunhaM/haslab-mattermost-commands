@@ -1,0 +1,23 @@
+meta {
+  name: Top Authors
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8787
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  token: quote_token
+  channel_name: bottest
+  command: /quote
+  text: top
+  user_name: @command_author
+}
+
+docs {
+  Allows whoever added a quote to edit its content.
+}

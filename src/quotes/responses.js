@@ -59,6 +59,19 @@ export function quotesList(quotes) {
 	return Response.json(response);
 }
 
+export function authorsTop(top) {
+	let response = { ...quotesResponse };
+
+	let mdTop = '|Rank|Author|Counter|\n|---|---|\n';
+	for (const [index, entry] of top.entries()) {
+		mdTop += `|${index + 1}º|${entry.author}|${entry.counter}|\n`;
+	}
+
+	response['attachments'] = [{ color: '#FFA500', text: mdTop }];
+
+	return Response.json(response);
+}
+
 export function quoteNotFound() {
 	let response = { ...quotesResponse };
 	response['text'] = 'No quote found!';

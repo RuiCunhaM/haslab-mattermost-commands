@@ -2,6 +2,7 @@ import { addQuote } from './addQuote';
 import { editQuote } from './editQuote';
 import { getQuote } from './getQuote';
 import { listQuotes } from './listQuotes';
+import { topAuthors } from './topAuthors';
 import { man } from './man';
 
 import { badCommand } from '../commonResponses';
@@ -22,6 +23,8 @@ export async function quotesDispatcher(env, body) {
 			return getQuote(env, text);
 		case 'list':
 			return listQuotes(env, text);
+		case 'top':
+			return topAuthors(env);
 		case 'man':
 			return man();
 		default:

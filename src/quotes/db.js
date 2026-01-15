@@ -41,6 +41,10 @@ export async function getQuoteById(env, id) {
 	return await env.DB.prepare('SELECT * FROM quotes WHERE id = ?1').bind(id).first();
 }
 
+export async function getTopAuthors(env) {
+	return await env.DB.prepare('SELECT COUNT(quote) as counter, author FROM quotes GROUP BY author ORDER BY counter DESC').all();
+}
+
 export async function updateQuote(env, id, quote) {
 	const { changed_db } = (await env.DB.prepare('UPDATE quotes SET quote = ?1 WHERE id == ?2').bind(quote, id).run()).meta;
 
