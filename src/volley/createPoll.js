@@ -3,7 +3,8 @@ import { sendDiscordMessage } from './discord';
 import { volleyMessage, creatingPoll } from './responses';
 
 const VALID_HOURS = ['17:00', '18:00'];
-const RALLLY_CREATE_URL = 'https://app.rallly.co/api/trpc/polls.create?batch=1';
+const RALLLY_CREATE_URL = 'https://app.rallly.co/api/trpc/polls.make?batch=1';
+const RALLLY_AUTH_URL = 'https://app.rallly.co/api/better-auth/sign-in/anonymous';
 
 const UM_TEMPLATE_URL = (date) => `https://sasum.scl.pt/aluguercampos.php?dia=${date}&desporto=`;
 
@@ -87,6 +88,22 @@ async function getSlots(startDate) {
 }
 
 async function createRalllyPoll(env, date, slots) {
+	// Authenticate anonymously before creating the poll
+	const authRes = await fetch(RALLLY_AUTH_URL, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({}),
+	});
+
+	if (!authRes.ok) {
+		console.log('Anonymous auth failed');
+		return badCommand();
+	}
+
+	const authCookies = authRes.headers.get('set-cookie') || '';
+
 	const payload = {
 		0: {
 			json: {
@@ -104,6 +121,7 @@ async function createRalllyPoll(env, date, slots) {
 				values: {
 					requireParticipantEmail: ['undefined'],
 				},
+				v: 1,
 			},
 		},
 	};
@@ -112,7 +130,7 @@ async function createRalllyPoll(env, date, slots) {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Cookie: env.RALLLY_COOKIE,
+			Cookie: authCookies,
 		},
 		body: JSON.stringify(payload),
 	});
@@ -124,7 +142,7 @@ async function createRalllyPoll(env, date, slots) {
 		return badCommand();
 	}
 
-	const urlId = result[0]?.result?.data?.json?.id;
+	const urlId = result[0]?.result?.data?.json?.data?.id;
 
 	return `https://app.rallly.co/invite/${urlId}`;
 }
