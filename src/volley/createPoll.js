@@ -130,7 +130,7 @@ async function createRalllyPoll(env, date, slots) {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Cookie: authCookies || env.RALLLY_COOKIE,
+			Cookie: authCookies,
 		},
 		body: JSON.stringify(payload),
 	});
